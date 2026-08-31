@@ -1,0 +1,14 @@
+name: Release Database
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Add this to enable the manual "Run workflow" button in the caller repo
+
+jobs:
+  call-central-workflow:
+    if: github.repository != 'tomdstanton/kaptive-db-template'
+    uses: klebgenomics/Kaptive/.github/workflows/database_cicd.yml@master
+    permissions:
+      contents: write # Pass write permissions down to the central workflow
